@@ -1,0 +1,58 @@
+version: "3"
+
+services:
+
+  airBnbDb:
+    container_name: hubDb
+    image: postgres
+    restart: always
+    ports:
+      - "5435:5432"
+    volumes:
+      - postgres-volumes:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: airbnb
+      POSTGRES_USER: airbnb
+      POSTGRES_DB: airbnb
+    networks:
+      - hubNetwork
+
+
+  keycloak-postgres:
+    image: postgres:11.2
+    container_name: keycloak-postgres
+    volumes:
+      - keycloak-volume:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_PASSWORD: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_DB: keycloak
+    networks:
+      - hubNetwork
+
+  keycloak:
+    image: jboss/keycloak:10.0.1
+    container_name: keycloak
+    #    restart: unless-stopped
+    restart: always
+    ports:
+      - "8000:8080"
+    environment:
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+      DB_USER: keycloak
+      DB_PASSWORD: keycloak
+      DB_ADDR: keycloak-postgres
+      DB_VENDOR: postgres
+      PROXY_ADDRESS_FORWARDING: "true"
+    depends_on:
+      - keycloak-postgres
+    networks:
+      - hubNetwork
+
+networks:
+  hubNetwork:
+
+volumes:
+  postgres-volumes:
+  keycloak-volume:
