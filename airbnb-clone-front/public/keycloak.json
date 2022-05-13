@@ -1,0 +1,8 @@
+{
+  "realm": "airbnb-clone-realm",
+  "auth-server-url": "http://localhost:8000/auth",
+  "ssl-required": "external",
+  "resource": "airbnb-client",
+  "public-client": true,
+  "confidential-port": 0
+}
