@@ -1,0 +1,59 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+airbnb-clone-front/node_modules
+airbnb-clone-front/.pnp
+airbnb-clone-front/.pnp.js
+
+# testing
+airbnb-clone-front/coverage
+
+# production
+airbnb-clone-front/build
+
+# misc
+airbnb-clone-front/.DS_Store
+airbnb-clone-front/.env.local
+airbnb-clone-front/.env.development.local
+airbnb-clone-front/.env.test.local
+airbnb-clone-front/.env.production.local
+
+airbnb-clone-front/npm-debug.log*
+airbnb-clone-front/yarn-debug.log*
+airbnb-clone-front/yarn-error.log*
+
+
+HELP.md
+airbnb-clone-back/target/
+!airbnb-clone-back/.mvn/wrapper/maven-wrapper.jar
+!airbnb-clone-back/**/src/main/**/target/
+!airbnb-clone-back/**/src/test/**/target/
+
+### STS ###
+airbnb-clone-back/.apt_generated
+airbnb-clone-back/.classpath
+airbnb-clone-back/.factorypath
+airbnb-clone-back/.project
+airbnb-clone-back/.settings
+airbnb-clone-back/.springBeans
+airbnb-clone-back/.sts4-cache
+
+### IntelliJ IDEA ###
+airbnb-clone-back/.idea
+airbnb-clone-back/*.iws
+airbnb-clone-back/*.iml
+airbnb-clone-back/*.ipr
+
+### NetBeans ###
+airbnb-clone-back/nbproject/private/
+airbnb-clone-back/nbbuild/
+airbnb-clone-back/dist/
+airbnb-clone-back/nbdist/
+airbnb-clone-back/.nb-gradle/
+build/
+!airbnb-clone-back/**/src/main/**/build/
+!airbnb-clone-back/**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+airbnb-clone-back/.gitignore
