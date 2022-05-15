@@ -62,6 +62,21 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+    public void deactivateAccount(Long id) {
+
+    }
+
+    @Override
+    public void activateAccount(Long id) {
+
+    }
+
+    @Override
+    public void resetPassword() {
+
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<AppUser> user = Optional.ofNullable(userRepo.findByUserName(username));
         if(user.isEmpty()){

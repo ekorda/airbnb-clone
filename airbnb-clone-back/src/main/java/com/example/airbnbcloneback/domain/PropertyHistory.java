@@ -16,12 +16,12 @@ public class PropertyHistory {
     @Id
     @GeneratedValue
     private Long id;
-//    private double price;
-//    @OneToOne
-//    private Tenant tenant;
-    //@Temporal(TemporalType.DATE)
+    private double price;
+    @OneToOne(cascade = CascadeType.ALL)
+    private AppUser tenant;
     @ManyToOne
     private Property property;
+    //@Temporal(TemporalType.DATE)
     private LocalDate leaseStartDate;
     //@Temporal(TemporalType.DATE)
     private LocalDate leaseEndDate;

@@ -11,4 +11,7 @@ public interface UserService {
     void addRoleToUser(String userName, String roleName);
     AppUser getUser(String userName);
     List<AppUser> getUsers();
+    void deactivateAccount(Long id);
+    void activateAccount(Long id);
+    void resetPassword();
 }

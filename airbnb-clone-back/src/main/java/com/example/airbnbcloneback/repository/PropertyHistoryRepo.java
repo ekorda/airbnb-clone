@@ -13,6 +13,4 @@ import java.util.List;
 public interface PropertyHistoryRepo extends JpaRepository<PropertyHistory, Long> {
     @Query("select p from PropertyHistory h join h.property p order by h.leaseStartDate DESC ")
     List<Property> getLastPropertiesRented();
-
-
 }

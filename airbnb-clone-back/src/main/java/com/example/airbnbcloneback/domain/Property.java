@@ -4,6 +4,7 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -20,19 +21,20 @@ public class Property {
     Long id;
     int numberOfRooms;
     double price;
-    boolean isAvailable;
-    @OneToMany(cascade = CascadeType.ALL)
+    boolean available;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @ToString.Exclude
     List<PropertyHistory> history;
-
     @OneToOne @ToString.Exclude
     PropertyHistory currentHistory;
 //    @OneToMany
 //    List<Photo> pictures;
-//    @Embedded
-//    Address address;
+    @Embedded
+    Address address;
+    private LocalDate deletedAt;
 
-    
+
+
     public void addHistory(PropertyHistory propertyHistory){
         if(history == null)
             history = new ArrayList<>();

@@ -4,6 +4,7 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
@@ -18,8 +19,9 @@ public class AppUser {
     private String name;
     private String userName;
     private String password;
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany( cascade = CascadeType.ALL)
     private Collection<AppRole> roles;
+    private LocalDate deletedAt;
 
 
     @Override
