@@ -2,6 +2,7 @@ package com.example.airbnbcloneback;
 
 import com.example.airbnbcloneback.domain.*;
 import com.example.airbnbcloneback.dtos.LeaseDTO;
+import com.example.airbnbcloneback.dtos.PropertyDTO;
 import com.example.airbnbcloneback.service.PropertyService;
 import com.example.airbnbcloneback.service.UserService;
 import org.springframework.boot.CommandLineRunner;
@@ -45,28 +46,28 @@ public class AirbnbCloneBackApplication {
 //		};
 //	}
 
-//	@Bean
-//	CommandLineRunner run(PropertyService propertyService){
-//		return args -> {
-//			Property property = new Property(null, 5, 3400,false,null,null
-//					,new Address("Iowa","Fairfield","1000 N","52557"));
-//			Property propert1 = new Property(null, 3, 3400,false,null,null
-//					,new Address("Iowa","Ottumwa","1000 N","52557"));
-//			Property property2 = new Property(null, 2, 3400,false,null,null
-//					,new Address("Iowa","Iowa City","1000 N","52557"));
-//
-//			propertyService.addProperty(property);
-//			propertyService.addProperty(property2);
-//			propertyService.addProperty(propert1);
-//
-//			Map<String, String> map = new HashMap<>(){{
-//				//put("occupied", "false");
-//				put("num-of-rooms", "3");
-//				put("location","Ottu");
-//			}};
-//			System.out.println(propertyService.getProperties(map));
-//		};
-//	}
+	@Bean
+	CommandLineRunner run(PropertyService propertyService){
+		return args -> {
+			PropertyDTO property = new PropertyDTO( 5, 3400.0,false
+					,new Address("Iowa","Fairfield","1000 N","52557"));
+			PropertyDTO propert1 = new PropertyDTO(3, 3400.0,false
+					,new Address("Iowa","Ottumwa","1000 N","52557"));
+			PropertyDTO property2 = new PropertyDTO(2, 3400,false
+					,new Address("Iowa","Iowa City","1000 N","52557"));
+
+			propertyService.addProperty(property);
+			propertyService.addProperty(property2);
+			propertyService.addProperty(propert1);
+
+			Map<String, String> map = new HashMap<>(){{
+				//put("occupied", "false");
+				put("num-of-rooms", "3");
+				put("location","Ottu");
+			}};
+			System.out.println(propertyService.getProperties(map));
+		};
+	}
 
 //	@Bean
 //	CommandLineRunner run(PropertyService propertyService){

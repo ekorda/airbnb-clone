@@ -33,10 +33,6 @@ public class PropertyServiceImpl implements PropertyService {
         if(filterParams.containsKey("num-of-rooms")) numOfRooms = Integer.parseInt(filterParams.get("num-of-rooms"));
         if(filterParams.containsKey("location")) location = filterParams.get("location");
 
-//        System.out.println(numOfRooms);
-//        System.out.println(available);
-//        System.out.println(location);
-
         return propertyRepo.
                 findAllByAvailableAndNumberOfRoomsAndLocation(available,numOfRooms,location + "%");
     }
@@ -101,5 +97,17 @@ public class PropertyServiceImpl implements PropertyService {
     public void deleteProperty(Long id) {
         Optional<Property> property = Optional.of(propertyRepo.getById(id));
         property.ifPresent(value -> value.setDeletedAt(LocalDate.now()));
+    }
+
+    @Override
+    public void updateProperty(Long id, PropertyDTO propertyDTO) {
+        Optional<Property> property = Optional.of(propertyRepo.getById(id));
+        property.ifPresent(value -> {
+          value.setAvailable(propertyDTO.isAvailability());
+          value.setAddress(propertyDTO.getAddress());
+          value.setNumberOfRooms(propertyDTO.getNumberOfRooms());
+          value.setPrice(propertyDTO.getPrice());
+        });
+        propertyRepo.save(property.get());
     }
 }

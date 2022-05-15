@@ -16,4 +16,5 @@ public interface PropertyService {
     void unListProperty(Long id);
     void leaseProperty(LeaseDTO leaseDTO) throws Exception;
     void deleteProperty(Long id);
+    void updateProperty(Long id, PropertyDTO propertyDTO);
 }

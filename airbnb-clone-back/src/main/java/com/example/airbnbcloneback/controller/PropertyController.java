@@ -35,12 +35,18 @@ public class PropertyController {
     }
 
     @PutMapping("/{id}")
+    public ResponseEntity<?> updateProperty(@PathVariable Long id, @RequestBody PropertyDTO propertyDTO){
+        propertyService.updateProperty(id, propertyDTO);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping("/{id}/unlist")
     public  ResponseEntity<?> unListProperty(@PathVariable Long id){
         propertyService.unListProperty(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PostMapping
+    @PostMapping("/lease")
     public ResponseEntity<?> leaseProperty(@RequestBody LeaseDTO leaseDTO){
         try{
             propertyService.leaseProperty(leaseDTO);
