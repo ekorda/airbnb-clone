@@ -10,7 +10,6 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Getter @Setter @ToString
 @NoArgsConstructor @AllArgsConstructor
 public class AppUser {
@@ -19,7 +18,7 @@ public class AppUser {
     private String name;
     private String userName;
     private String password;
-    @ManyToMany( cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER , cascade = CascadeType.PERSIST)
     private Collection<AppRole> roles;
     private LocalDate deletedAt;
 

@@ -1,5 +1,7 @@
 package com.example.airbnbcloneback.service.impl;
 
+import com.example.airbnbcloneback.controller.response.AppUserResponse;
+import com.example.airbnbcloneback.controller.response.VerifyPasswordResponse;
 import com.example.airbnbcloneback.domain.AppRole;
 import com.example.airbnbcloneback.domain.AppUser;
 import com.example.airbnbcloneback.repository.RoleRepo;
@@ -21,17 +23,21 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Service @RequiredArgsConstructor @Transactional @Slf4j
+@Service
+@RequiredArgsConstructor
+@Transactional
+@Slf4j
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepo userRepo;
     private final RoleRepo roleRepo;
     private final PasswordEncoder passwordEncoder;
 
+
     @Override
     public AppUser saveUser(AppUser user) {
         log.info("Saving new user {} ", user.getName());
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(user.getPassword());
         return userRepo.save(user);
     }
 
@@ -43,16 +49,37 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public void addRoleToUser(String userName, String roleName) {
-        log.info("Adding role {} to user {} ", roleName , userName);
+        log.info("Adding role {} to user {} ", roleName, userName);
         AppUser user = userRepo.findByUserName(userName);
         AppRole role = roleRepo.findByName(roleName);
         user.addRole(role);
     }
 
     @Override
-    public AppUser getUser(String userName) {
+    public AppUserResponse getUser(String userName) {
         log.info("Fetching user {} ", userName);
-        return userRepo.findByUserName(userName);
+        AppUser appUser = userRepo.findByUserName(userName);
+
+        if (appUser == null) {
+            //exception
+        }
+        AppUserResponse appUserResponse =
+                new AppUserResponse(appUser.getUserName(), String.valueOf(appUser.getId()),
+                        appUser.getRoles().stream().map(r -> r.getName()).collect(Collectors.toSet()));
+
+        return appUserResponse;
+    }
+
+    @Override
+    public VerifyPasswordResponse verifyUserPassword(String userName, String password) {
+        log.info("verifying user {} ", userName);
+        VerifyPasswordResponse rs = new VerifyPasswordResponse();
+        AppUser user = userRepo.findByUserName(userName);
+
+        log.info("verifying password {} with {}", user.getPassword() , password);
+
+        rs.setResult(user.getPassword().equals(password));
+        return rs;
     }
 
     @Override
@@ -79,7 +106,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<AppUser> user = Optional.ofNullable(userRepo.findByUserName(username));
-        if(user.isEmpty()){
+        if (user.isEmpty()) {
             log.error("User not found");
             throw new UsernameNotFoundException("User not found");
         }
@@ -90,6 +117,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
                 .map(AppRole::getName)
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
-        return new User(appUser.getUserName(), appUser.getPassword(), authorities );
+        return new User(appUser.getUserName(), appUser.getPassword(), authorities);
     }
 }

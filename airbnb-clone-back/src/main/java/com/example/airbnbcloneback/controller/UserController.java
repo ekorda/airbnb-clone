@@ -7,6 +7,7 @@ import com.example.airbnbcloneback.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,9 +17,20 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     private final UserService userService;
 
-    @GetMapping("/")
+    @GetMapping("")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> getUsers(){
         return ResponseEntity.ok().body(userService.getUsers());
+    }
+
+    @GetMapping("/{username}")
+    public ResponseEntity<?> getUser(@PathVariable String username){
+        return ResponseEntity.ok().body(userService.getUser(username));
+    }
+
+    @PostMapping("/{username}/verify-password")
+    public ResponseEntity<?> verifyUserPassword(@PathVariable String username , @RequestBody String password){
+        return ResponseEntity.ok().body(userService.getUser(username));
     }
 
     @PostMapping
