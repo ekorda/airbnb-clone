@@ -14,6 +14,11 @@ import java.util.Objects;
 @Setter
 @ToString
 public class AppRole {
+
+    public static final String ADMIN ="ADMIN";
+    public static final String LANDLORD ="LANDLORD";
+    public static final String TENANT ="TENANT";
+
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
