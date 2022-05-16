@@ -12,16 +12,17 @@ import SavePropertyForm from "./components/savaPropertyForm/savePropertyForm";
 function App() {
   const store = StoreService.setup();
   return (
-    //<Welcome></Welcome>
     <Provider store={store}>
+      <Welcome></Welcome>
+
       <BrowserRouter>
         <Routes>
           <Route
             path="/landloard"
             element={
-              //<RenderOnAuthenticated>
+              <RenderOnAuthenticated>
                 <Landloard />
-              //</RenderOnAuthenticated>
+              </RenderOnAuthenticated>
             }
           />
           <Route

@@ -57,7 +57,7 @@ public class AirbnbCloneBackApplication {
             userService
                     .saveUser(
                             new AppUser(null, "Abe", "abe", "1234",
-                                    Arrays.asList(new AppRole(null, AppRole.ADMIN), new AppRole(null, AppRole.LANDLORD), new AppRole(null, AppRole.TENANT))));
+                                    Arrays.asList(new AppRole(null, AppRole.ADMIN), new AppRole(null, AppRole.LANDLORD), new AppRole(null, AppRole.TENANT)), null ));
 
         };
     }
