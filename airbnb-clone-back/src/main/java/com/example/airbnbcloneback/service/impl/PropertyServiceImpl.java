@@ -68,7 +68,19 @@ public class PropertyServiceImpl implements PropertyService {
     @Override
     public void unListProperty(Long id) {
         Optional<Property> optionalProperty = propertyRepo.findById(id);
-        optionalProperty.ifPresent(property -> property.setAvailable(false));
+        optionalProperty.ifPresent(property -> {
+            property.setAvailable(false);
+            propertyRepo.save(property);
+        });
+    }
+
+    @Override
+    public void listProperty(Long id) {
+        Optional<Property> optionalProperty = propertyRepo.findById(id);
+        optionalProperty.ifPresent(property -> {
+            property.setAvailable(true);
+            propertyRepo.save(property);
+        });
     }
 
     @Override
@@ -79,10 +91,12 @@ public class PropertyServiceImpl implements PropertyService {
         if(leaseDTO.getLeasePaymentAmount()
                 < leaseDTO.getLeaseDuration() * optionalProperty.get().getPrice())
             throw new CustomError("Payment not sufficient for lease duration");
+        if(!optionalProperty.get().isAvailable())
+            throw new CustomError("Property cannot be leased at this time");
 
         Property property = optionalProperty.get();
         AppUser tenant = userRepo.getById(leaseDTO.getTenantID());
-        PropertyHistory history = new PropertyHistory(null,
+        PropertyHistory history = new PropertyHistory(
                 property.getPrice(),
                 tenant,
                 property,

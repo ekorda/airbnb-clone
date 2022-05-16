@@ -21,10 +21,19 @@ public class PropertyHistory {
     private AppUser tenant;
     @ManyToOne
     private Property property;
-    //@Temporal(TemporalType.DATE)
     private LocalDate leaseStartDate;
-    //@Temporal(TemporalType.DATE)
     private LocalDate leaseEndDate;
+    private double totalPaid;
+
+    public PropertyHistory(double price, AppUser tenant, Property property, LocalDate leaseStartDate, LocalDate leaseEndDate) {
+        this.id = id;
+        this.price = price;
+        this.tenant = tenant;
+        this.property = property;
+        this.leaseStartDate = leaseStartDate;
+        this.leaseEndDate = leaseEndDate;
+        totalPaid = price * (leaseEndDate.getMonth().getValue() - leaseStartDate.getMonth().getValue());
+    }
 
     @Override
     public boolean equals(Object o) {

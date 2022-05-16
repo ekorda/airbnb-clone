@@ -14,6 +14,7 @@ public interface PropertyService {
     List<Property> getLastNPropertiesRented(int number);
     List<Property> getPropertiesWhoseLeaseEndsBefore(LocalDate date);
     void unListProperty(Long id);
+    void listProperty(Long id);
     void leaseProperty(LeaseDTO leaseDTO) throws Exception;
     void deleteProperty(Long id);
     void updateProperty(Long id, PropertyDTO propertyDTO);

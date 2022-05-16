@@ -10,10 +10,14 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Getter @Setter @ToString
-@NoArgsConstructor @AllArgsConstructor
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class AppUser {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private String userName;
@@ -37,7 +41,7 @@ public class AppUser {
     }
 
     public void addRole(AppRole role) {
-        if(roles == null)
+        if (roles == null)
             roles = new ArrayList<>();
         roles.add(role);
     }

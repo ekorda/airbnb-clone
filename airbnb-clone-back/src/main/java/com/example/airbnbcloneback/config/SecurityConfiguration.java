@@ -30,7 +30,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             "/v3/api-docs.yml",
             "/swagger-ui/**",
             "/swagger-ui.html",
-            "/api/v1/keycloak/users/**"
+            "/api/v1/keycloak/users/**",
+            "/**"
     };
 
     @Override
