@@ -26,4 +26,7 @@ public interface PropertyRepo extends JpaRepository<Property, Long> {
             Boolean isAvailable,
             Integer numberOfRoom,
             String city);
+
+    @Query("select distinct sum (p.price) from Property p join fetch p.history where p.address.city =:city")
+    Double getTotalIncomeForLocation(String city);
 }

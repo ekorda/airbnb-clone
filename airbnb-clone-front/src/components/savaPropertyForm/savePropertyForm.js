@@ -25,7 +25,7 @@ const SavePropertyForm = () => {
         }
         propertyDTO["address"] = address;
         console.log(propertyDTO)
-        axios.post('http://localhost:8081/api/v1/properties', propertyDTO, {headers: {"Access-Control-Allow-Origin": "*"}})
+        axios.post('http://localhost:8081/api/v1/properties', propertyDTO)
         .then(response => console.log(response))
         .catch(err => console.log(err));
         //console.log(state)

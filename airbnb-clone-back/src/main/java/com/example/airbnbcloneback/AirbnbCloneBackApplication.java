@@ -31,6 +31,14 @@ public class AirbnbCloneBackApplication {
 		return new BCryptPasswordEncoder();
 	}
 
+
+	@Bean
+	CommandLineRunner run(PropertyService propertyService){
+		return args -> {
+
+		};
+	}
+
 //	@Bean
 //	CommandLineRunner run(PropertyService propertyService, UserService userService){
 //		return args -> {
@@ -46,28 +54,28 @@ public class AirbnbCloneBackApplication {
 //		};
 //	}
 
-	@Bean
-	CommandLineRunner run(PropertyService propertyService){
-		return args -> {
-			PropertyDTO property = new PropertyDTO( 5, 3400.0,false
-					,new Address("Iowa","Fairfield","1000 N","52557"));
-			PropertyDTO propert1 = new PropertyDTO(3, 3400.0,false
-					,new Address("Iowa","Ottumwa","1000 N","52557"));
-			PropertyDTO property2 = new PropertyDTO(2, 3400,false
-					,new Address("Iowa","Iowa City","1000 N","52557"));
-
-			propertyService.addProperty(property);
-			propertyService.addProperty(property2);
-			propertyService.addProperty(propert1);
-
-			Map<String, String> map = new HashMap<>(){{
-				//put("occupied", "false");
-				put("num-of-rooms", "3");
-				put("location","Ottu");
-			}};
-			System.out.println(propertyService.getProperties(map));
-		};
-	}
+//	@Bean
+//	CommandLineRunner run(PropertyService propertyService){
+//		return args -> {
+//			PropertyDTO property = new PropertyDTO( 5, 3400.0,false
+//					,new Address("Iowa","Fairfield","1000 N","52557"));
+//			PropertyDTO propert1 = new PropertyDTO(3, 3400.0,false
+//					,new Address("Iowa","Ottumwa","1000 N","52557"));
+//			PropertyDTO property2 = new PropertyDTO(2, 3400,false
+//					,new Address("Iowa","Iowa City","1000 N","52557"));
+//
+//			propertyService.addProperty(property);
+//			propertyService.addProperty(property2);
+//			propertyService.addProperty(propert1);
+//
+//			Map<String, String> map = new HashMap<>(){{
+//				//put("occupied", "false");
+//				put("num-of-rooms", "3");
+//				put("location","Ottu");
+//			}};
+//			System.out.println(propertyService.getProperties(map));
+//		};
+//	}
 
 //	@Bean
 //	CommandLineRunner run(PropertyService propertyService){

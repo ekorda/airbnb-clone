@@ -110,4 +110,9 @@ public class PropertyServiceImpl implements PropertyService {
         });
         propertyRepo.save(property.get());
     }
+
+    @Override
+    public Double totalIncomePerLocation(String city) {
+        return null;
+    }
 }
