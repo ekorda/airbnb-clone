@@ -1,0 +1,12 @@
+.container{
+    padding-left: 30px;
+    padding-right: 30px;
+    width: 50%;
+    border-radius: 19px;
+    box-shadow: 0px 0px 3px 3px #88888830;
+}
+
+.btn{
+    margin-top: 10px;
+}
+

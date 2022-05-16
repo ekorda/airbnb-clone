@@ -5,6 +5,7 @@ import com.example.airbnbcloneback.dtos.LeaseDTO;
 import com.example.airbnbcloneback.dtos.PropertyDTO;
 import com.example.airbnbcloneback.service.PropertyService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,9 +30,15 @@ public class PropertyController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+
     @PostMapping
     public ResponseEntity<?> createProperty(@RequestBody PropertyDTO propertyDTO){
-        return new ResponseEntity<>(propertyService.addProperty(propertyDTO), HttpStatus.CREATED);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
+        return ResponseEntity.ok()
+                .headers(headers)
+                .body(propertyService.addProperty(propertyDTO));
+       // return new ResponseEntity<>(propertyService.addProperty(propertyDTO), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")

@@ -7,27 +7,29 @@ import RenderOnAuthenticated from "./components/helper/RenderOnAuthenticated";
 import StoreService from "./services/StoreService";
 import { Provider } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import SavePropertyForm from "./components/savaPropertyForm/savePropertyForm";
 
 function App() {
   const store = StoreService.setup();
   return (
+    //<Welcome></Welcome>
     <Provider store={store}>
       <BrowserRouter>
         <Routes>
           <Route
             path="/landloard"
             element={
-              <RenderOnAuthenticated>
+              //<RenderOnAuthenticated>
                 <Landloard />
-              </RenderOnAuthenticated>
+              //</RenderOnAuthenticated>
             }
           />
           <Route
             path="/"
             element={
-              <RenderOnAnonymous>
-                <Welcome />
-              </RenderOnAnonymous>
+              //<RenderOnAnonymous>
+              <SavePropertyForm />
+              //</RenderOnAnonymous>
             }
           />
         </Routes>
