@@ -17,5 +17,5 @@ public interface PropertyService {
     void leaseProperty(LeaseDTO leaseDTO) throws Exception;
     void deleteProperty(Long id);
     void updateProperty(Long id, PropertyDTO propertyDTO);
-    Double totalIncomePerLocation(String city);
+    Double getTotalIncomePerLocation(String city);
 }

@@ -19,9 +19,9 @@ function App() {
           <Route
             path="/landloard"
             element={
-              //<RenderOnAuthenticated>
+              <RenderOnAuthenticated>
                 <Landloard />
-              //</RenderOnAuthenticated>
+              </RenderOnAuthenticated>
             }
           />
           <Route

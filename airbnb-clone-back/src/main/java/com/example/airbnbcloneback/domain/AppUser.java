@@ -18,7 +18,7 @@ public class AppUser {
     private String name;
     private String userName;
     private String password;
-    @ManyToMany(fetch = FetchType.EAGER , cascade = CascadeType.PERSIST)
+    @ManyToMany( cascade = CascadeType.PERSIST)
     private Collection<AppRole> roles;
     private LocalDate deletedAt;
 

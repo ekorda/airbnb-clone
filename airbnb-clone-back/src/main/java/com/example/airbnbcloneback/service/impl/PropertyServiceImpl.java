@@ -112,7 +112,7 @@ public class PropertyServiceImpl implements PropertyService {
     }
 
     @Override
-    public Double totalIncomePerLocation(String city) {
-        return null;
+    public Double getTotalIncomePerLocation(String city) {
+        return historyRepo.getTotalIncomeForLocation(city);
     }
 }

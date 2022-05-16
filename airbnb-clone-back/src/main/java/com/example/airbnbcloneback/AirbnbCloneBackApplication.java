@@ -1,7 +1,11 @@
 package com.example.airbnbcloneback;
 
+import com.example.airbnbcloneback.domain.Address;
 import com.example.airbnbcloneback.domain.AppRole;
 import com.example.airbnbcloneback.domain.AppUser;
+import com.example.airbnbcloneback.domain.Property;
+import com.example.airbnbcloneback.dtos.PropertyDTO;
+import com.example.airbnbcloneback.service.PropertyService;
 import com.example.airbnbcloneback.service.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -26,6 +30,15 @@ public class AirbnbCloneBackApplication {
         return new BCryptPasswordEncoder();
     }
 
+	@Bean
+	CommandLineRunner run(PropertyService propertyService){
+		return args -> {
+            PropertyDTO propertyDTO = new PropertyDTO(5,3500,false
+                    ,new Address("Iowa","Fairfield","1000 N","52557"));
+		   propertyService.addProperty(propertyDTO);
+           System.out.println(propertyService.getTotalIncomePerLocation("Fairfield"));
+		};
+	}
 
 
 //	@Bean
@@ -67,16 +80,16 @@ public class AirbnbCloneBackApplication {
 //	}
 
 
-    @Bean
-    @Transactional
-    CommandLineRunner run(UserService userService ) {
-        return args -> {
-
-            userService
-                    .saveUser(
-                            new AppUser(null, "Abe", "abe", "1234",
-                                    Arrays.asList(new AppRole(null, AppRole.ADMIN), new AppRole(null, AppRole.LANDLORD), new AppRole(null, AppRole.TENANT)),null));
-
-        };
-    }
+//    @Bean
+//    @Transactional
+//    CommandLineRunner run(UserService userService ) {
+//        return args -> {
+//
+//            userService
+//                    .saveUser(
+//                            new AppUser(null, "Abe", "abe", "1234",
+//                                    Arrays.asList(new AppRole(null, AppRole.ADMIN), new AppRole(null, AppRole.LANDLORD), new AppRole(null, AppRole.TENANT)),null));
+//
+//        };
+//    }
 }
