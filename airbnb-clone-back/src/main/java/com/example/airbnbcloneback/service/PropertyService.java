@@ -10,7 +10,7 @@ import java.util.Map;
 
 public interface PropertyService {
     List<Property> getProperties(Map<String, String> filterParams);
-    Property addProperty(PropertyDTO propertyDTO);
+    PropertyDTO addProperty(PropertyDTO propertyDTO);
     List<Property> getLastNPropertiesRented(int number);
     List<Property> getPropertiesWhoseLeaseEndsBefore(LocalDate date);
     void unListProperty(Long id);

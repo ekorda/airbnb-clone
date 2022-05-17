@@ -18,14 +18,15 @@ const SavePropertyForm = () => {
         e.preventDefault();
         let propertyDTO = {...state}
         let address = {
-            "state" : delete propertyDTO.state,
-            "city": delete propertyDTO.city,
-            "addressLine": delete propertyDTO.addressLine,
-            "zipcode": delete propertyDTO.zipcode
+            "state" :  propertyDTO.state,
+            "city":  propertyDTO.city,
+            "addressLine":  propertyDTO.addressLine,
+            "zipcode":  propertyDTO.zipcode
         }
         propertyDTO["address"] = address;
         console.log(propertyDTO)
-        axios.post('http://localhost:8081/api/v1/properties', propertyDTO)
+        axios.post('http://localhost:8081/api/v1/properties', 
+                propertyDTO)
         .then(response => console.log(response))
         .catch(err => console.log(err));
         //console.log(state)
@@ -42,6 +43,8 @@ const SavePropertyForm = () => {
                     <option>true</option>
                     <option>false</option>
                 </select>
+                <label>Price</label>
+                <input type={'text'} name="price" onChange={onInputchange}/>
                 <h4>Address</h4>
                 <label>State</label>
                 <input type={'text'} name='state' onChange={onInputchange}/>

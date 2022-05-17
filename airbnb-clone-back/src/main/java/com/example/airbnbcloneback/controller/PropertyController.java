@@ -30,15 +30,9 @@ public class PropertyController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-
     @PostMapping
     public ResponseEntity<?> createProperty(@RequestBody PropertyDTO propertyDTO){
-        HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
-        return ResponseEntity.ok()
-                .headers(headers)
-                .body(propertyService.addProperty(propertyDTO));
-       // return new ResponseEntity<>(propertyService.addProperty(propertyDTO), HttpStatus.CREATED);
+       return new ResponseEntity<>(propertyService.addProperty(propertyDTO), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
@@ -63,9 +57,17 @@ public class PropertyController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @GetMapping("total-income-for/{city}")
+    public ResponseEntity<?> getTotalIncomeForLocation(@PathVariable String city){
+        System.out.println(propertyService.getTotalIncomePerLocation(city));
+        return new ResponseEntity<>(propertyService.getTotalIncomePerLocation(city),HttpStatus.OK);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteProperty(@PathVariable Long id){
         propertyService.deleteProperty(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+
 }

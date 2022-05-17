@@ -8,12 +8,13 @@ import StoreService from "./services/StoreService";
 import { Provider } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import SavePropertyForm from "./components/savaPropertyForm/savePropertyForm";
+import TotalIncomeForLocation from "./components/totalIncomeForLocation/totalIncomeForLocation"
 
 function App() {
   const store = StoreService.setup();
   return (
     <Provider store={store}>
-      <Welcome></Welcome>
+      {/* <Welcome></Welcome> */}
 
       <BrowserRouter>
         <Routes>
@@ -29,8 +30,9 @@ function App() {
             path="/"
             element={
               //<RenderOnAnonymous>
-              <SavePropertyForm />
+              // <SavePropertyForm />
               //</RenderOnAnonymous>
+              <TotalIncomeForLocation/>
             }
           />
         </Routes>

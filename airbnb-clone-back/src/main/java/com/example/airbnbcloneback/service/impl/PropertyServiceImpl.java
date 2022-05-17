@@ -11,18 +11,21 @@ import com.example.airbnbcloneback.repository.PropertyRepo;
 import com.example.airbnbcloneback.repository.UserRepo;
 import com.example.airbnbcloneback.service.PropertyService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Service @RequiredArgsConstructor
+@Service @RequiredArgsConstructor @Slf4j
 public class PropertyServiceImpl implements PropertyService {
 
     private final PropertyRepo propertyRepo;
     private final PropertyHistoryRepo historyRepo;
     private final UserRepo userRepo;
+    private final ModelMapper mapper;
 
     @Override
     public List<Property> getProperties(Map<String, String> filterParams) {
@@ -39,7 +42,7 @@ public class PropertyServiceImpl implements PropertyService {
 
 
     @Override
-    public Property addProperty(PropertyDTO propertyDTO) {
+    public PropertyDTO addProperty(PropertyDTO propertyDTO) {
         Property property = new Property(null,
                 propertyDTO.getNumberOfRooms(),
                 propertyDTO.getPrice(),
@@ -48,11 +51,14 @@ public class PropertyServiceImpl implements PropertyService {
                 null,
                 propertyDTO.getAddress(),
                 null);
-        return propertyRepo.save(property);
+        log.info("Adding new property {} ", propertyDTO);
+        propertyRepo.save(property);
+        return mapper.map(property, PropertyDTO.class);
     }
 
     @Override
     public List<Property> getLastNPropertiesRented(int number) {
+
         return historyRepo
                 .getLastPropertiesRented()
                 .stream()
@@ -72,6 +78,7 @@ public class PropertyServiceImpl implements PropertyService {
             property.setAvailable(false);
             propertyRepo.save(property);
         });
+        log.info("Unlisting property {} ", optionalProperty.get());
     }
 
     @Override
@@ -81,6 +88,7 @@ public class PropertyServiceImpl implements PropertyService {
             property.setAvailable(true);
             propertyRepo.save(property);
         });
+        log.info("listing property {} ", optionalProperty.get());
     }
 
     @Override
@@ -105,6 +113,8 @@ public class PropertyServiceImpl implements PropertyService {
         property.addHistory(history);
         property.setAvailable(false);
         propertyRepo.save(property);
+        log.info("Leasing property {} ", optionalProperty.get());
+
     }
 
     @Override
@@ -127,6 +137,7 @@ public class PropertyServiceImpl implements PropertyService {
 
     @Override
     public Double getTotalIncomePerLocation(String city) {
-        return historyRepo.getTotalIncomeForLocation(city);
+        Optional<Double> optional = Optional.ofNullable(historyRepo.getTotalIncomeForLocation(city));
+        return optional.orElse(0.0);
     }
 }

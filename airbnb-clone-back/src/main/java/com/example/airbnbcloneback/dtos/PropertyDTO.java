@@ -13,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PropertyDTO {
+    private Long id;
     private int numberOfRooms;
     private double price;
     private boolean availability;
