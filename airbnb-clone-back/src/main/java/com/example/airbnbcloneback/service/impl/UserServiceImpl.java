@@ -4,6 +4,7 @@ import com.example.airbnbcloneback.controller.response.AppUserResponse;
 import com.example.airbnbcloneback.controller.response.VerifyPasswordResponse;
 import com.example.airbnbcloneback.domain.AppRole;
 import com.example.airbnbcloneback.domain.AppUser;
+import com.example.airbnbcloneback.dtos.UserDTO;
 import com.example.airbnbcloneback.repository.RoleRepo;
 import com.example.airbnbcloneback.repository.UserRepo;
 import com.example.airbnbcloneback.service.UserService;
@@ -35,10 +36,22 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 
     @Override
-    public AppUser saveUser(AppUser user) {
+    public AppUser saveUser(UserDTO user) {
         log.info("Saving new user {} ", user.getName());
-        user.setPassword(user.getPassword());
-        return userRepo.save(user);
+        //user.setPassword(user.getPassword());
+        AppUser appUser = new AppUser(
+                user.getId(),
+                user.getName(),
+                user.getUserName(),
+                user.getPassword(),
+                null,
+                null
+        );
+        //System.out.println(user+ "kjhkjjghjgk");
+        if(user.getRole().equals("Tenant")) appUser.addRole(new AppRole(null, AppRole.TENANT));
+        if(user.getRole().equals("Landlord")) appUser.addRole(new AppRole(null, AppRole.LANDLORD));
+        if(user.getRole().equals("admin")) appUser.addRole(new AppRole(null, AppRole.ADMIN));
+        return userRepo.save(appUser);
     }
 
     @Override

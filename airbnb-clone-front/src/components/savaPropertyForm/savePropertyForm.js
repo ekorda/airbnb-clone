@@ -14,6 +14,16 @@ const SavePropertyForm = () => {
         console.log(state)
       }
 
+    const onImageChange = event => {
+        if (event.target.files ) {
+          let img = event.target.files[0];
+          let changedState = {...state}
+          changedState["image"] = URL.createObjectURL(img)
+          setState(changedState);
+        }
+        console.log(state)
+      };
+
     const onSubmit = (e) => {
         e.preventDefault();
         let propertyDTO = {...state}
@@ -29,7 +39,6 @@ const SavePropertyForm = () => {
                 propertyDTO)
         .then(response => console.log(response))
         .catch(err => console.log(err));
-        //console.log(state)
     }
 
     return (
@@ -55,7 +64,7 @@ const SavePropertyForm = () => {
                 <label>Zipcode</label>
                 <input type={'text'} name="zipcode" onChange={onInputchange}/>
                 <label>Upload Pictures</label>
-                <input type="file" id="images" name="images" multiple onChange={onInputchange}/>
+                <input type="file" id="images" name="images" multiple onChange={onImageChange}/>
                 <button type='submit' className="btn btn-primary btn-lg btn-block">Save</button>
             </form>
         </div>

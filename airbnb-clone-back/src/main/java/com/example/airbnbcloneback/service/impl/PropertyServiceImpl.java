@@ -2,6 +2,7 @@ package com.example.airbnbcloneback.service.impl;
 
 import com.example.airbnbcloneback.CustomError.CustomError;
 import com.example.airbnbcloneback.domain.AppUser;
+import com.example.airbnbcloneback.domain.Photo;
 import com.example.airbnbcloneback.domain.Property;
 import com.example.airbnbcloneback.domain.PropertyHistory;
 import com.example.airbnbcloneback.dtos.LeaseDTO;
@@ -9,12 +10,14 @@ import com.example.airbnbcloneback.dtos.PropertyDTO;
 import com.example.airbnbcloneback.repository.PropertyHistoryRepo;
 import com.example.airbnbcloneback.repository.PropertyRepo;
 import com.example.airbnbcloneback.repository.UserRepo;
+import com.example.airbnbcloneback.service.FileStorageService;
 import com.example.airbnbcloneback.service.PropertyService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -26,6 +29,7 @@ public class PropertyServiceImpl implements PropertyService {
     private final PropertyHistoryRepo historyRepo;
     private final UserRepo userRepo;
     private final ModelMapper mapper;
+    private final FileStorageService storageService;
 
     @Override
     public List<Property> getProperties(Map<String, String> filterParams) {
@@ -49,8 +53,12 @@ public class PropertyServiceImpl implements PropertyService {
                 propertyDTO.isAvailability(),
                 null,
                 null,
+                null,
                 propertyDTO.getAddress(),
                 null);
+        //storageService.init();
+        //Path path = storageService.save(propertyDTO.getImage());
+        //property.addImage(new Photo(null, path.toAbsolutePath().toString()));
         log.info("Adding new property {} ", propertyDTO);
         propertyRepo.save(property);
         return mapper.map(property, PropertyDTO.class);

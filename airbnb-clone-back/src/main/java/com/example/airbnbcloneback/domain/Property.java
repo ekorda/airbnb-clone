@@ -27,8 +27,8 @@ public class Property {
     List<PropertyHistory> history;
     @OneToOne @ToString.Exclude
     PropertyHistory currentHistory;
-//    @OneToMany
-//    List<Photo> pictures;
+    @OneToMany
+    List<Photo> images;
     @Embedded
     Address address;
     private LocalDate deletedAt;
@@ -40,6 +40,12 @@ public class Property {
             history = new ArrayList<>();
         history.add(propertyHistory);
         currentHistory = propertyHistory;
+    }
+
+    public void addImage(Photo p){
+        if(images == null)
+            images = new ArrayList<>();
+        images.add(p);
     }
 
     @Override

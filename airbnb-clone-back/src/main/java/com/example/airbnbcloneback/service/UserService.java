@@ -4,11 +4,12 @@ import com.example.airbnbcloneback.controller.response.AppUserResponse;
 import com.example.airbnbcloneback.controller.response.VerifyPasswordResponse;
 import com.example.airbnbcloneback.domain.AppRole;
 import com.example.airbnbcloneback.domain.AppUser;
+import com.example.airbnbcloneback.dtos.UserDTO;
 
 import java.util.List;
 
 public interface UserService {
-    AppUser saveUser(AppUser user);
+    AppUser saveUser(UserDTO user);
     AppRole saveRole(AppRole role);
     void addRoleToUser(String userName, String roleName);
     AppUserResponse getUser(String userName);

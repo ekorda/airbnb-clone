@@ -3,6 +3,7 @@ package com.example.airbnbcloneback.controller;
 
 import com.example.airbnbcloneback.domain.AppRole;
 import com.example.airbnbcloneback.domain.AppUser;
+import com.example.airbnbcloneback.dtos.UserDTO;
 import com.example.airbnbcloneback.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -34,7 +35,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createUser(@RequestBody AppUser user){
+    public ResponseEntity<?> createUser(@RequestBody UserDTO user){
         return ResponseEntity.created(null).body(userService.saveUser(user));
     }
 

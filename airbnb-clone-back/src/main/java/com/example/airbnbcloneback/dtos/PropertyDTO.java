@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -19,4 +20,5 @@ public class PropertyDTO {
     private boolean availability;
     private Address address;
     //List<String> photoURLs;
+    //private MultipartFile image;
 }
